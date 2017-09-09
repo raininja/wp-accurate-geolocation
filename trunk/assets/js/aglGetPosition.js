@@ -9,7 +9,7 @@ function aglInitialise() {
 		var data = {
 	        'action': aglActionName,
 	        'error_code': -1,
-	        'error_message': 'Geolocation is not available. Try getting a device from the Stone Age, at least :)'
+	        'error_message': 'Geolocation is not available. This plugin aims at W3C Mobile HTML5 compliance. :)'
     	};
 
     	aglPostData(data);
@@ -79,7 +79,7 @@ jQuery(document).ready(function($) {
 			window.onload = aglInitialise;
 		}
 	}
-	
+
 	if (aglPhpParams.is_ask_onclick == 'yes') {
 		jQuery('#aglId').click(aglInitialise);
 	}

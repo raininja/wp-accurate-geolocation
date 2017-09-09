@@ -38,7 +38,7 @@ if ( is_admin() ) {
 function agl_on_activation() {
 	$option_name = 'agl_settings';
 	$settings    = get_option( $option_name );
-	
+
 	$all_default_settings = array(
 		'gcp_maximumAge' => 'Infinity',
 		'gcp_enableHighAccuracy' => 'true',
@@ -78,9 +78,9 @@ function agl_setcookie_value( $data ) {
 }
 
 function agl_enqueue_script() {
-	wp_enqueue_script( 'geoPosition', plugins_url( 'assets/js/geoPosition.js', __FILE__ ), array(), false, true );
+	wp_enqueue_script( 'geoPosition', plugins_url( 'assets/js/geoPosition_b.js', __FILE__ ), array(), false, true );
 	wp_enqueue_script( 'aglGetPosition', plugins_url( 'assets/js/aglGetPosition.js', __FILE__ ), array( 'jquery' ), false, true );
-	
+
 	$agl_params = get_option( 'agl_settings' );
 	$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
 	$params = array(
@@ -120,7 +120,7 @@ function agl_request_callback() {
 	if ( $agl_params['is_db_store'] == 'yes' ) {
 		add_option( 'agl_data_' . uniqid() . '_' . md5( mt_rand() ), $response, '', 'no' );
 	}
-	
+
 	if ( $agl_params['is_db_user_store'] == 'yes' && $response['user_id'] != 0 ) {
 		update_user_meta( $response['user_id'], 'agl_data', $response );
 	}
@@ -170,7 +170,7 @@ function agl_admin_submenu() {
 }
 
 
-function agl_settings_init(  ) { 
+function agl_settings_init(  ) {
 
 	if ( isset( $_POST['agl-delete']) ) {
 		$count = agl_delete_data();
@@ -179,124 +179,124 @@ function agl_settings_init(  ) {
 	register_setting( 'pluginPage', 'agl_settings' );
 
 	add_settings_section(
-		'agl_pluginPage_section', 
-		__( 'General', 'wp-accu-geolocation' ), 
-		'agl_settings_section_1_callback', 
+		'agl_pluginPage_section',
+		__( 'General', 'wp-accu-geolocation' ),
+		'agl_settings_section_1_callback',
 		'pluginPage'
 	);
 
-	add_settings_field( 
-		'plugin_enabled', 
-		__( 'Enable geolocation (plugin)', 'wp-accu-geolocation' ), 
-		'agl_radio_field_0_render', 
-		'pluginPage', 
-		'agl_pluginPage_section' 
+	add_settings_field(
+		'plugin_enabled',
+		__( 'Enable geolocation (plugin)', 'wp-accu-geolocation' ),
+		'agl_radio_field_0_render',
+		'pluginPage',
+		'agl_pluginPage_section'
 	);
 
 	add_settings_section(
-		'agl_pluginPage_3_section', 
-		__( 'Set geolocation collection methods', 'wp-accu-geolocation' ), 
-		'', 
+		'agl_pluginPage_3_section',
+		__( 'Set geolocation collection methods', 'wp-accu-geolocation' ),
+		'',
 		'pluginPage'
 	);
 
-	add_settings_field( 
-		'is_ask_onload', 
-		__( 'Ask for geolocation on page load?', 'wp-accu-geolocation' ), 
-		'agl_radio_field_5_render', 
-		'pluginPage', 
-		'agl_pluginPage_3_section' 
+	add_settings_field(
+		'is_ask_onload',
+		__( 'Ask for geolocation on page load?', 'wp-accu-geolocation' ),
+		'agl_radio_field_5_render',
+		'pluginPage',
+		'agl_pluginPage_3_section'
 	);
 
-	add_settings_field( 
-		'cookie_life_hrs', 
-		__( 'On load cookie lifetime (hours)', 'wp-accu-geolocation' ), 
-		'agl_text_field_1_render', 
-		'pluginPage', 
-		'agl_pluginPage_3_section' 
+	add_settings_field(
+		'cookie_life_hrs',
+		__( 'On load cookie lifetime (hours)', 'wp-accu-geolocation' ),
+		'agl_text_field_1_render',
+		'pluginPage',
+		'agl_pluginPage_3_section'
 	);
 
-	add_settings_field( 
-		'is_ask_onclick', 
-		__( 'Ask for geolocation on button click?', 'wp-accu-geolocation' ), 
-		'agl_radio_field_6_render', 
-		'pluginPage', 
-		'agl_pluginPage_3_section' 
+	add_settings_field(
+		'is_ask_onclick',
+		__( 'Ask for geolocation on button click?', 'wp-accu-geolocation' ),
+		'agl_radio_field_6_render',
+		'pluginPage',
+		'agl_pluginPage_3_section'
 	);
 
 	add_settings_section(
-		'agl_pluginPage_4_section', 
-		__( 'Configure storage of geolocation data', 'wp-accu-geolocation' ), 
-		'', 
+		'agl_pluginPage_4_section',
+		__( 'Configure storage of geolocation data', 'wp-accu-geolocation' ),
+		'',
 		'pluginPage'
 	);
 
-	add_settings_field( 
-		'is_db_store', 
-		__( 'Store all geolocation in wp_options', 'wp-accu-geolocation' ), 
-		'agl_radio_field_2_render', 
-		'pluginPage', 
-		'agl_pluginPage_4_section' 
+	add_settings_field(
+		'is_db_store',
+		__( 'Store all geolocation in wp_options', 'wp-accu-geolocation' ),
+		'agl_radio_field_2_render',
+		'pluginPage',
+		'agl_pluginPage_4_section'
 	);
 
-	add_settings_field( 
-		'is_db_user_store', 
-		__( 'Store latest user geolocation in wp_usermeta', 'wp-accu-geolocation' ), 
-		'agl_radio_field_3_render', 
-		'pluginPage', 
-		'agl_pluginPage_4_section' 
+	add_settings_field(
+		'is_db_user_store',
+		__( 'Store latest user geolocation in wp_usermeta', 'wp-accu-geolocation' ),
+		'agl_radio_field_3_render',
+		'pluginPage',
+		'agl_pluginPage_4_section'
 	);
 
-	add_settings_field( 
-		'is_cookie_store', 
-		__( 'Store visitor geolocation in browser cookie', 'wp-accu-geolocation' ), 
-		'agl_radio_field_4_render', 
-		'pluginPage', 
-		'agl_pluginPage_4_section' 
+	add_settings_field(
+		'is_cookie_store',
+		__( 'Store visitor geolocation in browser cookie', 'wp-accu-geolocation' ),
+		'agl_radio_field_4_render',
+		'pluginPage',
+		'agl_pluginPage_4_section'
 	);
 
-	add_settings_field( 
-		'php_date_format', 
-		__( 'Date format for date stored (PHP formats only)', 'wp-accu-geolocation' ), 
-		'agl_text_field_9_render', 
-		'pluginPage', 
-		'agl_pluginPage_4_section' 
+	add_settings_field(
+		'php_date_format',
+		__( 'Date format for date stored (PHP formats only)', 'wp-accu-geolocation' ),
+		'agl_text_field_9_render',
+		'pluginPage',
+		'agl_pluginPage_4_section'
 	);
 
 	add_settings_section(
-		'agl_pluginPage_2_section', 
-		__( 'HTML Geolocation configuration', 'wp-accu-geolocation' ), 
-		'agl_settings_section_2_callback', 
+		'agl_pluginPage_2_section',
+		__( 'HTML Geolocation configuration', 'wp-accu-geolocation' ),
+		'agl_settings_section_2_callback',
 		'pluginPage'
 	);
 
-	add_settings_field( 
-		'gcp_enableHighAccuracy', 
-		__( 'High accuracy (geolocation option)', 'wp-accu-geolocation' ), 
-		'agl_radio_field_7_render', 
-		'pluginPage', 
-		'agl_pluginPage_2_section' 
-	);
-	
-	add_settings_field( 
-		'gcp_maximumAge', 
-		__( 'Maxiumim age (geolocation option)', 'wp-accu-geolocation' ), 
-		'agl_text_field_10_render', 
-		'pluginPage', 
-		'agl_pluginPage_2_section' 
+	add_settings_field(
+		'gcp_enableHighAccuracy',
+		__( 'High accuracy (geolocation option)', 'wp-accu-geolocation' ),
+		'agl_radio_field_7_render',
+		'pluginPage',
+		'agl_pluginPage_2_section'
 	);
 
-	add_settings_field( 
-		'gcp_timeout', 
-		__( 'Timeout (geolocation option)', 'wp-accu-geolocation' ), 
-		'agl_text_field_8_render', 
-		'pluginPage', 
-		'agl_pluginPage_2_section' 
+	add_settings_field(
+		'gcp_maximumAge',
+		__( 'Maxiumim age (geolocation option)', 'wp-accu-geolocation' ),
+		'agl_text_field_10_render',
+		'pluginPage',
+		'agl_pluginPage_2_section'
+	);
+
+	add_settings_field(
+		'gcp_timeout',
+		__( 'Timeout (geolocation option)', 'wp-accu-geolocation' ),
+		'agl_text_field_8_render',
+		'pluginPage',
+		'agl_pluginPage_2_section'
 	);
 }
 
 
-function agl_radio_field_0_render(  ) { 
+function agl_radio_field_0_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -309,7 +309,7 @@ function agl_radio_field_0_render(  ) {
 }
 
 
-function agl_text_field_1_render(  ) { 
+function agl_text_field_1_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -319,7 +319,7 @@ function agl_text_field_1_render(  ) {
 }
 
 
-function agl_radio_field_2_render(  ) { 
+function agl_radio_field_2_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -332,7 +332,7 @@ function agl_radio_field_2_render(  ) {
 }
 
 
-function agl_radio_field_3_render(  ) { 
+function agl_radio_field_3_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -345,7 +345,7 @@ function agl_radio_field_3_render(  ) {
 }
 
 
-function agl_radio_field_4_render(  ) { 
+function agl_radio_field_4_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -358,7 +358,7 @@ function agl_radio_field_4_render(  ) {
 }
 
 
-function agl_radio_field_5_render(  ) { 
+function agl_radio_field_5_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -371,7 +371,7 @@ function agl_radio_field_5_render(  ) {
 }
 
 
-function agl_radio_field_6_render(  ) { 
+function agl_radio_field_6_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -384,7 +384,7 @@ function agl_radio_field_6_render(  ) {
 }
 
 
-function agl_radio_field_7_render(  ) { 
+function agl_radio_field_7_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -397,7 +397,7 @@ function agl_radio_field_7_render(  ) {
 }
 
 
-function agl_text_field_8_render(  ) { 
+function agl_text_field_8_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -407,7 +407,7 @@ function agl_text_field_8_render(  ) {
 }
 
 
-function agl_text_field_9_render(  ) { 
+function agl_text_field_9_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -416,7 +416,7 @@ function agl_text_field_9_render(  ) {
 
 }
 
-function agl_text_field_10_render(  ) { 
+function agl_text_field_10_render(  ) {
 
 	$options = get_option( 'agl_settings' );
 	?>
@@ -425,16 +425,16 @@ function agl_text_field_10_render(  ) {
 
 }
 
-function agl_settings_section_1_callback(  ) { 
+function agl_settings_section_1_callback(  ) {
 	echo __( 'Below settings provide various ways of asking the user for geolocation data and also multiple ways of accessing the data. For a detailed explanation please access <a href="http://woo.report/wordpress-accurate-geolocation/" target="_blank">http://woo.report/wordpress-accurate-geolocation/</a>.
 		<br/><br/>To display users geolocation on a Google Map please access <a href="http://woo.report/wordpress-accurate-geolocation-map/" target="_blank">http://woo.report/wordpress-accurate-geolocation-map/</a>.', 'wp-accu-geolocation' );
 }
 
-function agl_settings_section_2_callback(  ) { 
+function agl_settings_section_2_callback(  ) {
 	echo __( 'For more information about HTML Geolocation please visit W3C API specifications at <a href="http://dev.w3.org/geo/api/spec-source.html" target="_blank">http://dev.w3.org/geo/api/spec-source.html</a>.', 'wp-accu-geolocation' );
 }
 
-function agl_options_page(  ) { 
+function agl_options_page(  ) {
 	?>
 	<div class="wrap">
 		<form action='options.php' method='post'>
@@ -449,7 +449,7 @@ function agl_options_page(  ) {
 			&nbsp;&nbsp;&nbsp;
 			<?php submit_button( 'Delete all geolocation data from wp_options table', 'delete', 'agl-delete', false ); ?>
 			</p>
-			
+
 		</form>
 	</div>
 	<?php
