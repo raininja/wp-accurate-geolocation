@@ -1,9 +1,9 @@
 === WordPress Accurate Geolocation ===
-Contributors: luciancapdefier
+Contributors: luciancapdefier, raininja
 Tags: geolocation, gps, html, html5, accurate, meters, html5 geolocation, html geolocation, gps geolocation, accurate geolocation, browser, browser geolocation, cookie geolocation, database geolocation, location aware, browser location, latitude, longitude, altitude, accuracy, speed, heading, user id, ajax
 Requires at least: 4.0.1
-Tested up to: 4.2.4
-Stable tag: 4.3
+Tested up to: 4.8.1
+Stable tag: 4.4.0
 License: GPLv3 or later License
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
