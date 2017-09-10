@@ -2,14 +2,13 @@
 
 /*
 Plugin Name: WordPress Accurate Geolocation
-Plugin URI: http://woo.report/product/wp-accu-geolocation
+Plugin URI: http://github.com/raininja/wp-accurate-geolocation
 Description: Accurate Geolocation with HTML5, modern and advanced geographic location identification features!
 Version: 1.0.0
-Author: Lucian Capdefier (luciancapdefier)
+Author: luciancapdefier, raininja
 Author URI: http://woo.report/about-us/#lucian.capdefier
 Text Domain: wp-accu-geolocation
 Domain Path: /languages
-Copyright: © 2015-2015 WooReports.
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -78,7 +77,7 @@ function agl_setcookie_value( $data ) {
 }
 
 function agl_enqueue_script() {
-	wp_enqueue_script( 'geoPosition', plugins_url( 'assets/js/geoPosition_b.js', __FILE__ ), array(), false, true );
+	wp_enqueue_script( 'geoPosition', plugins_url( 'assets/js/geoPosition_c.js', __FILE__ ), array(), false, true );
 	wp_enqueue_script( 'aglGetPosition', plugins_url( 'assets/js/aglGetPosition.js', __FILE__ ), array( 'jquery' ), false, true );
 
 	$agl_params = get_option( 'agl_settings' );
