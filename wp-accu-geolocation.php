@@ -271,7 +271,7 @@ function agl_settings_init(  ) {
 
 	add_settings_field(
 		'gcp_enableHighAccuracy',
-		__( 'High accuracy (geolocation option)', 'wp-accu-geolocation' ),
+		__( 'High accuracy', 'wp-accu-geolocation' ),
 		'agl_radio_field_7_render',
 		'pluginPage',
 		'agl_pluginPage_2_section'
@@ -279,7 +279,7 @@ function agl_settings_init(  ) {
 
 	add_settings_field(
 		'gcp_maximumAge',
-		__( 'Maxiumim age (geolocation option)', 'wp-accu-geolocation' ),
+		__( 'Maximum age in seconds', 'wp-accu-geolocation' ),
 		'agl_text_field_10_render',
 		'pluginPage',
 		'agl_pluginPage_2_section'
@@ -287,7 +287,7 @@ function agl_settings_init(  ) {
 
 	add_settings_field(
 		'gcp_timeout',
-		__( 'Timeout (geolocation option)', 'wp-accu-geolocation' ),
+		__( 'Timeout in seconds', 'wp-accu-geolocation' ),
 		'agl_text_field_8_render',
 		'pluginPage',
 		'agl_pluginPage_2_section'
@@ -430,7 +430,7 @@ function agl_settings_section_1_callback(  ) {
 }
 
 function agl_settings_section_2_callback(  ) {
-	echo __( 'For more information about HTML Geolocation please visit W3C API specifications at <a href="http://dev.w3.org/geo/api/spec-source.html" target="_blank">http://dev.w3.org/geo/api/spec-source.html</a>.', 'wp-accu-geolocation' );
+	echo __( 'For more information about HTML5 Geolocation please visit W3C API specifications at <a href="http://dev.w3.org/geo/api/spec-source.html" target="_blank">http://dev.w3.org/geo/api/spec-source.html</a>.', 'wp-accu-geolocation' );
 }
 
 function agl_options_page(  ) {
@@ -445,8 +445,8 @@ function agl_options_page(  ) {
 
 			<p>
 			<?php submit_button( 'Save Changes', 'primary', 'submit', false); ?>
-			&nbsp;&nbsp;&nbsp;
-			<?php submit_button( 'Delete all geolocation data from wp_options table', 'delete', 'agl-delete', false ); ?>
+			<!-- &nbsp;&nbsp;&nbsp;
+			<php submit_button( 'Delete all geolocation data from wp_options table', 'delete', 'agl-delete', false ); > -->
 			</p>
 
 		</form>
