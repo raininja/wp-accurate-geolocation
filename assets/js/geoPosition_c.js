@@ -17,7 +17,8 @@ var geoPosition = function() {
   var pub = {};
   var provider = null;
   var u = "undefined";
-  var ipGeolocationSrv = 'http://freegeoip.net/json/?callback=JSONPCallback';
+  //var ipGeolocationSrv = 'http://freegeoip.net/json/?callback=JSONPCallback';
+  var ipGeolocationSrv = 'http://www.google.com/maps/dir/?api=1&JSONPCallback';
 
   pub.getCurrentPosition = function(success, error, opts) {
     provider.getCurrentPosition(success, error, opts);
@@ -58,8 +59,6 @@ var geoPosition = function() {
 
       if ((typeof(geoPositionSimulator) != u) && (geoPositionSimulator.length > 0)) {
         provider = geoPositionSimulator;
-      // } else if (typeof(bondi) != u && typeof(bondi.geolocation) != u) {
-      //   provider = bondi.geolocation;
       } else if (hasGeolocation) {
         provider = navigator.geolocation;
         pub.getCurrentPosition = function(success, error, opts) {

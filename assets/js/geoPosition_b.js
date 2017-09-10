@@ -5,8 +5,7 @@ var geoPosition=function() {
   var u="undefined";
   // here the prototype for the URL built from nav data is declared
   // should we use google here?
-  var ipGeolocationSrv =
-  'https://www.google.com/maps/dir/?api=1&JSONPCallback';
+  var ipGeolocationSrv = 'http://www.google.com/maps/dir/?api=1&JSONPCallback';
   //'http://freegeoip.net/json/?callback=JSONPCallback';
   // here the functionality of "JSONPCallback" is replaced
   // by the variable "parameters"
